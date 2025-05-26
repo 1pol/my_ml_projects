@@ -70,8 +70,8 @@ Source: Real estate data of Bengaluru containing features like area type, locati
 
 ## 🙋‍♂️ Author
 
-**Your Name** (replace with your name or GitHub handle)  
-📧 Email: your.email@example.com
+Harshit Polmersetty  
+📧 Email: harshit.pst049@gmail.com
 
 ---
 
