@@ -34,10 +34,10 @@ def predict():
         x[loc_index] = 1
 
     # Make prediction
-    prediction = model.predict([x])[0]*100000
+    output = model.predict(location ,sqft , BHK)
 
     # Render the predicted result page with the prediction
-    return render_template('result.html', prediction=prediction)
+    return render_template('result.html', prediction = output)
 
 if __name__ == '__main__':
     app.run(debug=True)
