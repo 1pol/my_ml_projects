@@ -188,7 +188,7 @@ def price_predict(location,sqft,bath,BHK):
   if prediction <= 0:
     return "unable to predict a valid price for the given input. Please check values"
   else:
-    return round(prediction * 100000, 2)
+    return f"Estimate price : Rs.{round(prediction * 100000, 2)}"
 
 
 print(price_predict('1st Phase JP Nagar',2000,2,4)*100000)
