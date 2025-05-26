@@ -16,6 +16,11 @@ df = pd.read_csv(r"C:\Users\KIIT0001\Desktop\myflaskproject\Bengaluru_House_Data
 locations = df['location'].unique().tolist()
 
 @app.route('/')
+def home():
+    with open('columns.pkl', 'rb') as f:
+        data_columns = pickle.load(f)
+    locations = data_columns[3:]  # Assuming first three columns are sqft, bath, bhk
+    return render_template('index.html', locations=locations)
 def index():
     return render_template('index.html',locations=locations)
 
