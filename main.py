@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from housepricep import price_predict
 import numpy as np
 import pandas as pd
 import pickle
