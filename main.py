@@ -21,20 +21,15 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get input values from the form
-    sqft = float(request.form['sqft'])
-    location = request.form['location']
-    bhk = int(request.form['bhk'])
-    
-    # Prepare the input features for prediction
-    loc_index = np.where(columns == location)[0][0]
-    x = np.zeros(len(columns))
-    x[0] = sqft
-    x[1] = bhk
-    if loc_index >= 0:
-        x[loc_index] = 1
+    try:
+        sqft = float(request.form['sqft'])
+        location = request.form['location']
+        bhk = int(request.form['bhk'])
 
     # Make prediction
-    output = model.predict(location ,sqft , BHK)
+        output = price_predict(location ,sqft , BHK)
+    except Exception as e:
+        output = f"Invalid input: {str(e)}"
 
     # Render the predicted result page with the prediction
     return render_template('result.html', prediction = output)
