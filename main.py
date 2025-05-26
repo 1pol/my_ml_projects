@@ -47,8 +47,11 @@ def predict():
     try:
         sqft = float(request.form['sqft'])
         location = request.form['location']
+        bath = int(request.form['bath'])
         bhk = int(request.form['bhk'])
 
+        if sqft < 300 or bath <= 0 or bhk <= 0 or bhk > 20:
+            return render_template('result.html', prediction="Invalid input. Please enter realistic values.")
     # Make prediction
         prediction = price_predict(location ,sqft , BHK)
         if prediction < 0:
