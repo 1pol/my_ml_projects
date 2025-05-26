@@ -168,14 +168,25 @@ model=LinearRegression()
 model.fit(X_train,y_train)
 print(model.score(X_test,y_test)*100)
 def price_predict(location,sqft,bath,BHK):
+  try:
     loc_index=np.where(X.columns==location)[0][0]
-    x=np.zeros(len(X.columns))
-    x[0]=sqft
-    x[1]=bath
-    x[2]=BHK
-    if loc_index >=0:
-        x[loc_index]=1
+  except IndexError:
+    return "Location not recognised"
+    
+  x=np.zeros(len(X.columns))
+  x[0]=sqft
+  x[1]=bath
+  x[2]=BHK
+  if loc_index >=0:
+      x[loc_index]=1
+  prediction = model.predict([x])[0]
+
+  if prediction <= 0:
+    return "unable to predict a valid price for the given input. Please check values"
+  else:
     return model.predict([x])[0]
+
+
 print(price_predict('1st Phase JP Nagar',2000,2,4)*100000)
 print(price_predict('Indira Nagar',1000,2,2)*100000)
 
