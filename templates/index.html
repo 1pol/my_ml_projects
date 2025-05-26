@@ -31,13 +31,17 @@
             <div class ="form-group">
                 <label for="sqft">Square Feet:</label>
                 <input type="number" name="sqft" id="sqft" required>
-             </div>    
+            </div>
+            <div class="form-group">
+                <label for="bath">Bathrooms:</label>
+                <input type="number" name="bath" id="bath" required>
+            </div>
             <div class="form-group">
                  <label for="location">Location:</label>
                 <select name="location" id="location" required>
                     <option value="">Select a Location</option> <!-- Placeholder option -->
                     {% for location in locations %}
-                    <option value="{{ location }}">{{ location }}</option>
+                    <option value="{{ loc }}">{{ loc }}</option>
                     {% endfor %}
                 </select>
             </div>
