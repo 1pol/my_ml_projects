@@ -19,6 +19,28 @@ locations = df['location'].unique().tolist()
 def index():
     return render_template('index.html',locations=locations)
 
+def price_predict(location, sqft, bath, bhk):
+    # Load model and columns
+    with open('model.pkl', 'rb') as f:
+        model = pickle.load(f)
+    with open('columns.pkl', 'rb') as f:
+        data_columns = pickle.load(f)
+
+    # Prepare input vector
+    try:
+        loc_index = data_columns.index(location.lower())
+    except ValueError:
+        loc_index = -1
+
+    x = np.zeros(len(data_columns))
+    x[0] = sqft
+    x[1] = bath
+    x[2] = bhk
+    if loc_index >= 0:
+        x[loc_index] = 1
+
+    return model.predict([x])[0]
+    
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get input values from the form
@@ -28,12 +50,12 @@ def predict():
         bhk = int(request.form['bhk'])
 
     # Make prediction
-        output = price_predict(location ,sqft , BHK)
+        prediction = price_predict(location ,sqft , BHK)
+        if prediction < 0:
+            return render_template('result.html', prediction="Prediction resulted in a negative value. Please check your inputs.")
+        return render_template('result.html', prediction=f"₹ {prediction:,.2f}")
     except Exception as e:
-        output = f"Invalid input: {str(e)}"
-
-    # Render the predicted result page with the prediction
-    return render_template('result.html', prediction = output)
+        return render_template('result.html', prediction=f"Error: {str(e)}")
 
 if __name__ == '__main__':
     app.run(debug=True)
