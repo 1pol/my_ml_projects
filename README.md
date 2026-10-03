@@ -71,10 +71,6 @@ Source: Real estate data of Bengaluru containing features like area type, locati
 ## 🙋‍♂️ Author
 
 Harshit Polmersetty  
-📧 Email: harshit.pst049@gmail.com
+📧 Email: harshit.int09@gmail.com
 
 ---
-
-## 📌 License
-
-This project is licensed under the MIT License.
